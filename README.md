@@ -1,16 +1,97 @@
-## Hi there 👋
+# **Yan Luca Viana de Araújo Fontenele**
 
-<!--
-**yan-luca/yan-luca** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+📧 yanlucaviana.com | 📞 (61) 99179-8293  
+🔗 [LinkedIn](https://www.linkedin.com/in/yan-luca-060a54209/) | 🐙 [GitHub](https://github.com/yan-luca) | 🌐 [Portfólio](https://github.com/yan-luca/yan-luca)
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🧭 Resumo Profissional
+
+Desenvolvedor Full Stack com experiência no desenvolvimento de aplicações web utilizando Java (Spring Boot) Angular e React, além de projetos embarcados com ESP32, Raspberry Pi. Conhecimento em linguagem C,  programação de sistemas embarcados e microcontroladores. Interesse em automação, IoT e soluções integradas. Familiaridade com bancos de dados relacionais, controle de versão com Git e metodologias ágeis.
+
+---
+
+## 💼 Experiência Profissional
+
+
+### **Estagiário em Desenvolvimento de Software**  
+*Superior Tribunal de Justiça (STJ) — Jan/2025 a Atual*  
+- Desenvolvimento de aplicações internas para gestão de riscos e compliance  
+- Utilização de **Java** com **Spring Boot** no backend  
+- Desenvolvimento de interfaces com **Angular** no frontend  
+- Integração com **SQL Server** para persistência de dados  
+---
+
+## Projetos Pessoais / Acadêmicos
+
+### **Sistema de Agendamento de Músicas**  
+[GitHub](https://github.com/yan-luca/yan-luca/tree/main/Sirene%20Musical)  
+*Python*  
+Sistema que permite programar horários para reprodução de músicas e anúncios da hora para ambientes escolares. Controla o reprodutor de áudio local via backend em Python.
+
+### **Controle de Lâmpadas com MQTT**  
+[GitHub](https://github.com/yan-luca/yan-luca/tree/main/Automacao%20Residencial)  
+*ESP32 + MQTT + Broker Mosquitto + Home Assistant + Ubuntu Server*  
+Sistema embarcado de automação residencial com controle de lâmpadas via interface web e protocolo MQTT.
+## **Sistema de priorização de Visitas Escolares**  
+[GitHub](https://github.com/orgs/fga-eps-mds/teams/2023-1-dnit/repositories)  
+*React + C#*  
+Sistema de gerenciamento de visitas escolares, com priorização e agendamento de visitas de campanhas educativas de trânsito
+
+### **Sistema de matrícula para Ensino Médio**
+[GitHub](https://github.com/mdsreq-fga-unb/2023.2-Matriculai)  
+*JavaScript*  
+Sistema de matrícula para matrícula de alunos em disciplinas eletivas do "Novo Ensino Médio"
+
+### **Sistema de Alarme Automotivo**  
+[GitHub](https://github.com/yan-luca/yan-luca/tree/main/Alarme%20Automotivo)  
+*C/C++*  
+Sistema de alarme automotivo com controle por bluetooth, acesso via impressão digitão  utilizando o microcontrolador ESP32.
+### **Robô Lutador de Sumô** 
+*C/C++*  
+Robô autônomo que identifica um oponente utilizando sensores de ultrassom e empurra o oponente para fora da arena sem sair da demarcação.
+
+---
+
+## 🎓 Formação Acadêmica
+
+**Engenharia de Software**  
+UnB - Universidade de Brasília
+Conclusão prevista: Dez/2026
+
+---
+
+## 🎓 Cursos e Certificações
+
+    • Inglês – Cooplem, 2019;
+    • Fundamentos de TI: Hardware e Software, Fundação Bradesco, 2020;
+    • Fundamentos de Lógica de Programação, Fundação Bradesco, 2020;
+    • Noções Básicas de Mecânica Automotiva, Senai, 2020;
+    • Oficina Photoshop – Composição de Imagens Cinemagraph, SAGA, 2020;
+    • Desenvolvendo Aplicações Mobile com Android Studio, Fundação Bradesco, 2022;
+    • Aplicação de CAD no Desenho Técnico, UnB, 2022;
+    • Introdução à Programação Orientada a Objetos(POO), Fundação Bradesco, 2023;
+    • Ética no Desenvolvimento de Sistemas, Fundação Bradesco, 2023;
+    • Linguagem de Programação Java – Básico, Fundação Bradesco, 2023;
+    • Automação de Sistemas, Aprenda Mais – MEC, 2023;
+    • Fundamentos do Suporte Técnico, Google, 2023;
+    • Eletricista de Sistemas Fotovoltaicos – Energia Solar, Senai, 2024;
+    • Capacitação em Sistemas Embarcados - Embarcatech, Instituto Hardware Brasil, 2025;
+---
+
+## 🛠️ Tecnologias e Ferramentas
+
+**Linguagens:** Java, Python, C/C++, JavaScript  
+**Frameworks:** Spring Boot, Angular, Flask  
+**Banco de Dados:** MySQL, SQL Server, PostgreSQL
+**Outros:** Git, Docker, Linux, MQTT, ESP32, Raspberry Pi, Figma, HTML/CSS
+
+---
+
+## 🗣️ Idiomas
+
+- Português: Nativo  
+- Inglês: Avançado (leitura técnica, documentação, cursos)
+
+---
+
