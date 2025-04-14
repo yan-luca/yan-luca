@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<script src="frontend.js    "></script>
+<script src="/socket.io/socket.io.js"></script>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Iluminação</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.3.7/mqtt.min.js"></script>
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .lamp-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .lamp-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="container mx-auto px-4">
+        <div class="bg-white shadow-xl rounded-lg p-6 max-w-2xl mx-auto">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Controle de Iluminação</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Sala de Estar -->
+                <div class="lamp-card bg-gray-50 rounded-lg p-4 shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-700">Sala de Estar</h2>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Status:</span>
+                        <span id="salaStatus" class="font-medium text-red-500">Desligada</span>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button onclick="toggleLight('home/sala', true)" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Ligar</button>
+                        <button onclick="toggleLight('home/sala', false)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Desligar</button>
+                    </div>
+                </div>
+
+                <!-- Quarto -->
+                <div class="lamp-card bg-gray-50 rounded-lg p-4 shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-700">Quarto</h2>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Status:</span>
+                        <span id="quartoStatus" class="font-medium text-red-500">Desligada</span>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button onclick="toggleLight('home/quarto', true)" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Ligar</button>
+                        <button onclick="toggleLight('home/quarto', false)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Desligar</button>
+                    </div>
+                </div>
+
+                <!-- Cozinha -->
+                <div class="lamp-card bg-gray-50 rounded-lg p-4 shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-700">Cozinha</h2>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Status:</span>
+                        <span id="cozinhaStatus" class="font-medium text-red-500">Desligada</span>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button onclick="toggleLight('home/cozinha', true)" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Ligar</button>
+                        <button onclick="toggleLight('home/cozinha', false)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Desligar</button>
+                    </div>
+                </div>
+
+                <!-- Banheiro -->
+                <div class="lamp-card bg-gray-50 rounded-lg p-4 shadow-md">
+                    <h2 class="text-xl font-semibold mb-4 text-gray-700">Varanda</h2>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Status:</span>
+                        <span id="varandaStatus" class="font-medium text-red-500">Desligada</span>
+                    </div>
+                    <div class="mt-4 flex space-x-4">
+                        <button onclick="toggleLight('home/varanda', true)" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Ligar</button>
+                        <button onclick="toggleLight('home/varanda', false)" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Desligar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <button onclick="toggleAllLights(true)" class="bg-blue-500 text-white px-6 py-2 rounded mr-4 hover:bg-blue-600">Ligar Todas</button>
+                <button onclick="toggleAllLights(false)" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-600">Desligar Todas</button>
+            </div>
+        </div>
+    </div>
+
+</body>
