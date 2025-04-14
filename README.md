@@ -82,7 +82,7 @@ Conclusão prevista: Dez/2026
 ## 🛠️ Tecnologias e Ferramentas
 
 **Linguagens:** Java, Python, C/C++, JavaScript  
-**Frameworks:** Spring Boot, Angular, Flask  
+**Frameworks:** Spring Boot, Angular, React  
 **Banco de Dados:** MySQL, SQL Server, PostgreSQL
 **Outros:** Git, Docker, Linux, MQTT, ESP32, Raspberry Pi, Figma, HTML/CSS
 
