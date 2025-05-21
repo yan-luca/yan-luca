@@ -53,9 +53,10 @@ Sistema de alarme automotivo com controle por bluetooth, acesso via impressão d
 Robô autônomo que identifica um oponente utilizando sensores de ultrassom e empurra o oponente para fora da arena sem sair da demarcação.
 
 ### **Sistema de Gestão Escolar**
-[GitHub](https://github.com/carlinn1/EduNotify)
-*Java + Spring Boot + Angular*
+[GitHub](https://github.com/carlinn1/EduNotify)   
+*Java + Spring Boot + Angular* 
 Sistema de gestão escolar com cadastro de alunos, professores, disciplinas, matrícula e envio de notificações aos responsáveis.
+
 ---
 
 ## 🎓 Formação Acadêmica
