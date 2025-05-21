@@ -1,3 +1,7 @@
+Interruptor em tela LCD touch com ESP32
+![Tela](fotoTela.jpeg)
+[Vídeo](https://youtube.com/shorts/fCXj5r3NSYw)
+
 Interface em JavaScript rodando como serviço em um Ubuntu Server a qual envia para um broker MQTT o estado dos botões e recebe via websocket qualquer mudança de estado para alterar o estado dos botões na interface
 
 ![Interface](interface.png)

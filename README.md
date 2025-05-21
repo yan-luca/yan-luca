@@ -33,7 +33,7 @@ Sistema que permite programar horários para reprodução de músicas e anúncio
 [GitHub](https://github.com/yan-luca/yan-luca/tree/main/Automacao%20Residencial)  
 *ESP32 + MQTT + Broker Mosquitto + Home Assistant + Ubuntu Server*  
 Sistema embarcado de automação residencial com controle de lâmpadas via interface web e protocolo MQTT.
-## **Sistema de priorização de Visitas Escolares**  
+### **Sistema de priorização de Visitas Escolares**  
 [GitHub](https://github.com/orgs/fga-eps-mds/teams/2023-1-dnit/repositories)  
 *React + C#*  
 Sistema de gerenciamento de visitas escolares, com priorização e agendamento de visitas de campanhas educativas de trânsito
@@ -47,10 +47,15 @@ Sistema de matrícula para matrícula de alunos em disciplinas eletivas do "Novo
 [GitHub](https://github.com/yan-luca/yan-luca/tree/main/Alarme%20Automotivo)  
 *C/C++*  
 Sistema de alarme automotivo com controle por bluetooth, acesso via impressão digitão  utilizando o microcontrolador ESP32.
-### **Robô Lutador de Sumô** 
+### **Robô Lutador de Sumô**
+[GitHub](https://github.com/yan-luca/yan-luca/tree/main/Robo%20Sumo)   
 *C/C++*  
 Robô autônomo que identifica um oponente utilizando sensores de ultrassom e empurra o oponente para fora da arena sem sair da demarcação.
 
+### **Sistema de Gestão Escolar**
+[GitHub](https://github.com/carlinn1/EduNotify)
+*Java + Spring Boot + Angular*
+Sistema de gestão escolar com cadastro de alunos, professores, disciplinas, matrícula e envio de notificações aos responsáveis.
 ---
 
 ## 🎓 Formação Acadêmica
