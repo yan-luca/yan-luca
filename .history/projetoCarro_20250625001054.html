@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Jornada da Troca de Motor - Storytelling</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #1e40af;
+            --accent-color: #f59e0b;
+            --danger-color: #dc2626;
+            --success-color: #059669;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --border-color: #e5e7eb;
+            --gradient: linear-gradient(135deg, #1e3a8a 0%, #f59e0b 100%);
+            --motor-gradient: linear-gradient(135deg, #374151 0%, #6b7280 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-light);
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) translateX(-5px);
+        }
+
+        .story-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .story-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .story-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Story Overview */
+        .story-overview {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .overview-card h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-card p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-header h2 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-header p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            min-height: 100px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--motor-gradient);
+            transform: translateX(-50%);
+            border-radius: 3px;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 50%;
+            opacity: 1;
+            display: block;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 4rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 4rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 40px;
+            width: 0;
+            height: 0;
+            border: 15px solid;
+            border-color: transparent transparent transparent white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 40px;
+            width: 0;
+            height: 0;
+            border: 15px solid;
+            border-color: transparent white transparent transparent;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 40px;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            border: 6px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -15px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -15px;
+        }
+
+        .timeline-step {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Media Content */
+        .media-content {
+            margin-top: 2rem;
+        }
+
+        .media-placeholder {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 2px dashed var(--border-color);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .media-placeholder:hover {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+
+        .media-placeholder i {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .media-placeholder .upload-text {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .media-placeholder .upload-subtext {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            opacity: 0.7;
+        }
+
+        .media-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .media-image:hover {
+            transform: scale(1.05);
+        }
+
+        .media-video {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .media-caption {
+            text-align: center;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Challenge/Solution Boxes */
+        .challenge-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 6px solid var(--danger-color);
+            padding: 2rem;
+            border-radius: 0 15px 15px 0;
+            margin: 1.5rem 0;
+        }
+
+        .challenge-box h4 {
+            color: var(--danger-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 6px solid var(--success-color);
+            padding: 2rem;
+            border-radius: 0 15px 15px 0;
+            margin: 1.5rem 0;
+        }
+
+        .solution-box h4 {
+            color: var(--success-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: var(--bg-light);
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .progress-label {
+            color: var(--text-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 15px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 15px;
+            transition: width 0.5s ease;
+        }
+
+        /* Tools List */
+        .tools-used {
+            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border-left: 6px solid var(--accent-color);
+        }
+
+        .tools-used h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tool-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 900px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .modal-content img,
+        .modal-content video {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-caption {
+            color: white;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 80px !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-marker {
+                left: 15px !important;
+                right: auto !important;
+            }
+
+            .timeline-content::after {
+                left: -15px !important;
+                right: auto !important;
+                border-color: transparent white transparent transparent !important;
+            }
+
+            .story-title {
+                font-size: 2.5rem;
+            }
+
+            .back-button {
+                position: static;
+                transform: none;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+
+            .story-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .story-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+            <h1 class="story-title">A Grande Troca de Motor</h1>
+            <p class="story-subtitle">Uma jornada de desafios, aprendizado e conquistas mecânicas</p>
+            <div class="story-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Janeiro - Março 2024</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-car"></i>
+                    <span>Honda Civic 2010</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-cogs"></i>
+                    <span>Motor 1.8L R18A</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>45 dias de projeto</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Story Overview -->
+    <section class="story-overview fade-in">
+        <div class="overview-card">
+            <h2>🚗 A História</h2>
+            <p>
+                Esta é a documentação completa da jornada de troca do motor do meu Honda Civic 2010. 
+                O que começou como uma necessidade se transformou em uma experiência de aprendizado 
+                incrível sobre mecânica automotiva, perseverança e a satisfação de fazer algo com as próprias mãos.
+            </p>
+            <p>
+                Aqui você encontrará cada etapa do processo, desde o diagnóstico do problema até o primeiro 
+                ronco do motor novo, passando por todos os desafios, ferramentas utilizadas e lições aprendidas.
+            </p>
+        </div>
+
+        <div class="story-stats">
+            <div class="stat-item">
+                <div class="stat-icon">📅</div>
+                <div class="stat-number">45</div>
+                <div class="stat-label">Dias de Trabalho</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🔧</div>
+                <div class="stat-number">127</div>
+                <div class="stat-label">Horas Trabalhadas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">📸</div>
+                <div class="stat-number">350+</div>
+                <div class="stat-label">Fotos Tiradas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">💰</div>
+                <div class="stat-number">R$ 8.500</div>
+                <div class="stat-label">Custo Total</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🛠️</div>
+                <div class="stat-number">23</div>
+                <div class="stat-label">Ferramentas Usadas</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🤝</div>
+                <div class="stat-number">5</div>
+                <div class="stat-label">Amigos Ajudaram</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section fade-in">
+        <div class="timeline-header">
+            <h2>📖 A Jornada Completa</h2>
+            <p>Acompanhe cada etapa desta aventura mecânica</p>
+        </div>
+        
+        <div class="timeline">
+            <!-- Etapa 1: O Problema -->
+            <div class="timeline-item">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">O Problema</span>
+                    <h3 class="timeline-title">🔥 Quando Tudo Começou</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        15 de Janeiro, 2024 - Segunda-feira
+                    </div>
+                    <p class="timeline-description">
+                        Era uma manhã como qualquer outra até que escutei um barulho estranho vindo do motor. 
+                        O que parecia ser apenas um "tick" acabou sendo o início de uma jornada que mudaria 
+                        minha relação com a mecânica automotiva para sempre.
+                    </p>
+                    
+                    <div class="challenge-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> O Problema</h4>
+                        <p>Motor fazendo ruído metálico constante, perda de potência progressiva e fumaça azul saindo do escapamento. Diagnóstico: biela batida devido à falta de óleo.</p>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione aqui a foto do motor com problema')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Foto: Motor com Problema</div>
+                            <div class="upload-subtext">Clique para adicionar imagem</div>
+                        </div>
+                        
+                        <div class="media-placeholder" onclick="alert('Adicione aqui o vídeo do barulho do motor')">
+                            <i class="fas fa-video"></i>
+                            <div class="upload-text">Vídeo: Barulho do Motor</div>
+                            <div class="upload-subtext">Clique para adicionar vídeo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 2: Diagnóstico -->
+            <div class="timeline-item">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Diagnóstico</span>
+                    <h3 class="timeline-title">🔍 Investigando o Problema</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        18 de Janeiro, 2024 - Quinta-feira
+                    </div>
+                    <p class="timeline-description">
+                        Depois do susto inicial, era hora de entender exatamente o que havia acontecido. 
+                        Levei o carro para um mecânico de confiança e o diagnóstico confirmou meus piores receios.
+                    </p>
+
+                    <div class="tools-used">
+                        <h4><i class="fas fa-wrench"></i> Ferramentas de Diagnóstico</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">Scanner OBD2</div>
+                            <div class="tool-item">Endoscópio</div>
+                            <div class="tool-item">Medidor de Compressão</div>
+                            <div class="tool-item">Estetoscópio Automotivo</div>
+                        </div>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-label">Diagnóstico Completo</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-grid">
+                            <div class="media-placeholder" onclick="alert('Adicione foto do endoscópio dentro do motor')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Endoscópio</div>
+                                <div class="upload-subtext">Dentro do motor</div>
+                            </div>
+                            <div class="media-placeholder" onclick="alert('Adicione foto dos códigos no scanner')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Scanner OBD2</div>
+                                <div class="upload-subtext">Códigos de erro</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 3: Pesquisa -->
+            <div class="timeline-item">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Pesquisa</span>
+                    <h3 class="timeline-title">📚 Estudando as Opções</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        20-25 de Janeiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        Com o diagnóstico em mãos, era hora de pesquisar as opções: motor remanufaturado, 
+                        motor usado, ou partir para um novo. Passei dias pesquisando preços, fornecedores 
+                        e avaliando a melhor relação custo-benefício.
+                    </p>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione planilha de comparação de preços')">
+                            <i class="fas fa-table"></i>
+                            <div class="upload-text">Planilha: Comparação de Preços</div>
+                            <div class="upload-subtext">Análise de fornecedores</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 4: Compra -->
+            <div class="timeline-item">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Aquisição</span>
+                    <h3 class="timeline-title">💰 A Compra do Motor</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        28 de Janeiro, 2024 - Domingo
+                    </div>
+                    <p class="timeline-description">
+                        Após muito pensar, decidi por um motor remanufaturado com garantia de 6 meses. 
+                        A decisão não foi fácil, mas o equilíbrio entre preço e confiabilidade me convenceu.
+                    </p>
+
+                    <div class="solution-box">
+                        <h4><i class="fas fa-check-circle"></i> A Escolha</h4>
+                        <p>Motor R18A remanufaturado com 6 meses de garantia, procedência comprovada e teste de bancada aprovado. Investimento total: R$ 5.200.</p>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione foto do motor novo/remanufaturado')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Foto: Motor Remanufaturado</div>
+                            <div class="upload-subtext">Chegada do novo motor</div>
+                        </div>
+                        
+                        <div class="media-placeholder" onclick="alert('Adicione vídeo do teste de bancada')">
+                            <i class="fas fa-video"></i>
+                            <div class="upload-text">Vídeo: Teste de Bancada</div>
+                            <div class="upload-subtext">Motor funcionando perfeitamente</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 5: Preparação -->
+            <div class="timeline-item">
+                <div class="timeline-marker">5</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Preparação</span>
+                    <h3 class="timeline-title">🛠️ Organizando o Workspace</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        2-5 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        Antes de começar a troca, precisava organizar tudo: local de trabalho, ferramentas, 
+                        peças adicionais e principalmente, reunir os amigos que toparam essa aventura comigo.
+                    </p>
+
+                    <div class="tools-used">
+                        <h4><i class="fas fa-toolbox"></i> Arsenal de Ferramentas</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">Jogo de Chaves</div>
+                            <div class="tool-item">Chaves de Fenda</div>
+                            <div class="tool-item">Macaco Hidráulico</div>
+                            <div class="tool-item">Cavaletes</div>
+                            <div class="tool-item">Talha 2 Toneladas</div>
+                            <div class="tool-item">Chaves Torx</div>
+                            <div class="tool-item">Multímetro</div>
+                            <div class="tool-item">Alicates Diversos</div>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-grid">
+                            <div class="media-placeholder" onclick="alert('Adicione foto da oficina/garagem organizada')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Oficina Organizada</div>
+                                <div class="upload-subtext">Pronta para o trabalho</div>
+                            </div>
+                            <div class="media-placeholder" onclick="alert('Adicione foto das ferramentas organizadas')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Ferramentas</div>
+                                <div class="upload-subtext">Tudo no lugar</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 6: Remoção -->
+            <div class="timeline-item">
+                <div class="timeline-marker">6</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Remoção</span>
+                    <h3 class="timeline-title">⚡ Tirando o Motor Velho</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        8-12 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        O momento mais tenso e trabalhoso: retirar o motor danificado. Cada parafuso, 
+                        cada conector, cada mangueira precisava ser documentada para facilitar a remontagem.
+                    </p>
+
+                    <div class="challenge-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Principais Desafios</h4>
+                        <p>Parafusos emperrados pela ferrugem, conectores frágeis que quebravam facilmente e o peso do motor na hora da remoção.</p>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-label">Remoção do Motor Antigo</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione vídeo da remoção do motor')">
+                            <i class="fas fa-video"></i>
+                            <div class="upload-text">Vídeo: Processo de Remoção</div>
+                            <div class="upload-subtext">Motor sendo retirado</div>
+                        </div>
+                        
+                        <div class="media-grid">
+                            <div class="media-placeholder" onclick="alert('Adicione foto do compartimento vazio')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Compartimento Vazio</div>
+                                <div class="upload-subtext">Sem o motor</div>
+                            </div>
+                            <div class="media-placeholder" onclick="alert('Adicione foto do motor danificado')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Motor Danificado</div>
+                                <div class="upload-subtext">Fora do carro</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 7: Limpeza -->
+            <div class="timeline-item">
+                <div class="timeline-marker">7</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Limpeza</span>
+                    <h3 class="timeline-title">🧽 Preparando o Compartimento</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        15-18 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        Com o motor fora, era hora de limpar tudo: óleo derramado, graxa acumulada e aproveitar 
+                        para trocar alguns componentes do compartimento que só são acessíveis sem o motor.
+                    </p>
+
+                    <div class="tools-used">
+                        <h4><i class="fas fa-spray-can"></i> Produtos de Limpeza</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">Desengraxante</div>
+                            <div class="tool-item">Escova de Aço</div>
+                            <div class="tool-item">Panos</div>
+                            <div class="tool-item">Água Pressurizada</div>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione foto do antes e depois da limpeza')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Antes e Depois</div>
+                            <div class="upload-subtext">Compartimento limpo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 8: Instalação -->
+            <div class="timeline-item">
+                <div class="timeline-marker">8</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Instalação</span>
+                    <h3 class="timeline-title">🔧 Colocando o Motor Novo</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        22-28 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        O momento mais esperado: instalar o motor novo. Todo cuidado era pouco para não 
+                        danificar nada e garantir que tudo fosse conectado corretamente.
+                    </p>
+
+                    <div class="solution-box">
+                        <h4><i class="fas fa-lightbulb"></i> Dica Importante</h4>
+                        <p>Documentar cada conector com fotos facilitou muito a remontagem. Etiquetas numeradas salvaram horas de trabalho!</p>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-label">Instalação do Motor Novo</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione vídeo da instalação do motor novo')">
+                            <i class="fas fa-video"></i>
+                            <div class="upload-text">Vídeo: Instalação</div>
+                            <div class="upload-subtext">Motor entrando no carro</div>
+                        </div>
+                        
+                        <div class="media-grid">
+                            <div class="media-placeholder" onclick="alert('Adicione foto do motor posicionado')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Motor Posicionado</div>
+                                <div class="upload-subtext">No lugar certo</div>
+                            </div>
+                            <div class="media-placeholder" onclick="alert('Adicione foto das conexões sendo feitas')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Conexões</div>
+                                <div class="upload-subtext">Ligando tudo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 9: Primeiro Teste -->
+            <div class="timeline-item">
+                <div class="timeline-marker">9</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Primeiro Teste</span>
+                    <h3 class="timeline-title">🔥 O Momento da Verdade</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        2 de Março, 2024 - Sábado
+                    </div>
+                    <p class="timeline-description">
+                        Depois de semanas de trabalho, chegou a hora de girar a chave e descobrir se tudo 
+                        deu certo. A tensão era palpável, mas o ronco do motor novo foi música para os ouvidos!
+                    </p>
+
+                    <div class="solution-box">
+                        <h4><i class="fas fa-trophy"></i> Sucesso!</h4>
+                        <p>Motor pegou na primeira tentativa! Sem vazamentos, sem ruídos estranhos, funcionamento perfeito.</p>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione vídeo do primeiro ronco do motor')">
+                            <i class="fas fa-video"></i>
+                            <div class="upload-text">Vídeo: Primeiro Ronco</div>
+                            <div class="upload-subtext">O momento mais esperado!</div>
+                        </div>
+                        
+                        <div class="media-placeholder" onclick="alert('Adicione foto da comemoração')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Foto: Comemoração</div>
+                            <div class="upload-subtext">Missão cumprida!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 10: Testes Finais -->
+            <div class="timeline-item">
+                <div class="timeline-marker">10</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Finalização</span>
+                    <h3 class="timeline-title">✅ Ajustes e Testes Finais</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i>
+                        5-10 de Março, 2024
+                    </div>
+                    <p class="timeline-description">
+                        Com o motor funcionando, era hora dos ajustes finais: check-up completo, 
+                        primeira troca de óleo, regulagem da ignição e testes de estrada para 
+                        garantir que tudo estava perfeito.
+                    </p>
+
+                    <div class="progress-container">
+                        <div class="progress-label">Projeto Concluído</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="tools-used">
+                        <h4><i class="fas fa-clipboard-check"></i> Checklist Final</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">✅ Níveis de Fluidos</div>
+                            <div class="tool-item">✅ Pressão dos Pneus</div>
+                            <div class="tool-item">✅ Teste de Estrada</div>
+                            <div class="tool-item">✅ Scanner OBD2</div>
+                            <div class="tool-item">✅ Regulagem Motor</div>
+                            <div class="tool-item">✅ Documentação</div>
+                        </div>
+                    </div>
+
+                    <div class="media-content">
+                        <div class="media-placeholder" onclick="alert('Adicione vídeo do teste de estrada')">
+                            <i class="fas fa-video"></i>
+                            <div class="upload-text">Vídeo: Teste de Estrada</div>
+                            <div class="upload-subtext">Primeiro passeio</div>
+                        </div>
+                        
+                        <div class="media-grid">
+                            <div class="media-placeholder" onclick="alert('Adicione foto do carro completo')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Carro Pronto</div>
+                                <div class="upload-subtext">Funcionando perfeitamente</div>
+                            </div>
+                            <div class="media-placeholder" onclick="alert('Adicione foto do time que ajudou')">
+                                <i class="fas fa-camera"></i>
+                                <div class="upload-text">Time de Apoio</div>
+                                <div class="upload-subtext">Quem fez acontecer</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); padding: 2rem; border-radius: 15px; margin-top: 2rem; border-left: 6px solid var(--success-color);">
+                        <h4 style="color: var(--success-color); margin-bottom: 1rem; font-size: 1.2rem;">🎯 Resultados Finais:</h4>
+                        <ul style="margin: 0; list-style: none; line-height: 1.8;">
+                            <li style="margin-bottom: 0.5rem;">🚗 <strong>Economia:</strong> R$ 3.500 comparado ao serviço completo em concessionária</li>
+                            <li style="margin-bottom: 0.5rem;">📚 <strong>Aprendizado:</strong> Conhecimento completo sobre mecânica automotiva</li>
+                            <li style="margin-bottom: 0.5rem;">🤝 <strong>Amizades:</strong> Fortalecimento dos laços com amigos que ajudaram</li>
+                            <li style="margin-bottom: 0.5rem;">⏱️ <strong>Tempo:</strong> 45 dias de projeto executado com sucesso</li>
+                            <li style="margin-bottom: 0.5rem;">🏆 <strong>Satisfação:</strong> Sensação indescritível de "eu fiz isso!"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="" style="display: none;">
+            <video id="modalVideo" controls style="display: none;">
+                <source src="" type="video/mp4">
+            </video>
+            <div id="modalCaption" class="modal-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Timeline animation on scroll - SIMPLIFIED
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Initialize timeline items
+        timelineItems.forEach((item, index) => {
+            // Make sure items are visible initially for debugging
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+            item.style.transition = 'all 0.6s ease';
+            timelineObserver.observe(item);
+        });
+
+        // Modal functions
+        function openModal(element, caption = '') {
+            const modal = document.getElementById('mediaModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            if (element.tagName === 'IMG') {
+                modalImage.src = element.src;
+                modalImage.style.display = 'block';
+                modalVideo.style.display = 'none';
+            } else if (element.tagName === 'VIDEO') {
+                modalVideo.src = element.querySelector('source').src;
+                modalVideo.style.display = 'block';
+                modalImage.style.display = 'none';
+            }
+            
+            modalCaption.textContent = caption;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('mediaModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const modalImage = document.getElementById('modalImage');
+            
+            modal.style.display = 'none';
+            modalVideo.pause();
+            modalImage.style.display = 'none';
+            modalVideo.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('mediaModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Add hover effects to stat items
+        document.querySelectorAll('.stat-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click handlers for media placeholders
+        document.querySelectorAll('.media-placeholder').forEach(placeholder => {
+            placeholder.addEventListener('click', function() {
+                // This is where you would implement file upload functionality
+                const uploadText = this.querySelector('.upload-text').textContent;
+                console.log('Upload clicked for:', uploadText);
+            });
+        });
+
+        // Progress bar animation when visible
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressFill = entry.target.querySelector('.progress-fill');
+                    if (progressFill) {
+                        setTimeout(() => {
+                            progressFill.style.width = progressFill.style.width || '100%';
+                        }, 500);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.progress-container').forEach(container => {
+            progressObserver.observe(container);
+        });
+    </script>
+</body>
+</html>

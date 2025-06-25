@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Jornada da Troca de Motor - Timeline</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background: #f8fafc;
+        }
+
+        :root {
+            --primary-color: #1e3a8a;
+            --accent-color: #f59e0b;
+            --danger-color: #dc2626;
+            --success-color: #059669;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #f59e0b 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Timeline Container */
+        .timeline-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        /* Central line */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #1e3a8a, #6b7280);
+            border-radius: 2px;
+        }
+
+        /* Timeline Item */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: flex;
+            width: 100%;
+        }
+
+        /* Odd items (left side) */
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-end;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 4rem;
+            text-align: right;
+        }
+
+        /* Even items (right side) */
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 4rem;
+            text-align: left;
+        }
+
+        /* Timeline Content */
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            max-width: 45%;
+            position: relative;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Arrow pointing to center */
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -10px;
+            width: 0;
+            height: 0;
+            border: 10px solid;
+            border-color: transparent transparent transparent white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border: 10px solid;
+            border-color: transparent white transparent transparent;
+        }
+
+        /* Timeline Marker (circle with number) */
+        .timeline-marker {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            border: 4px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 10;
+            box-shadow: 0 0 0 4px var(--primary-color);
+        }
+
+        /* Content Styles */
+        .timeline-step {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Special Boxes */
+        .challenge-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid var(--danger-color);
+            padding: 1rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1rem 0;
+        }
+
+        .challenge-box h4 {
+            color: var(--danger-color);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid var(--success-color);
+            padding: 1rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1rem 0;
+        }
+
+        .solution-box h4 {
+            color: var(--success-color);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .tools-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
+            border-left: 4px solid var(--accent-color);
+            padding: 1rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1rem 0;
+        }
+
+        .tools-box h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tool-item {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Media Placeholders */
+        .media-placeholder {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border: 2px dashed #9ca3af;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .media-placeholder:hover {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+
+        .media-placeholder i {
+            font-size: 2rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .upload-text {
+            color: #374151;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .upload-subtext {
+            color: #6b7280;
+            font-size: 0.8rem;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .progress-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+                transform: none;
+            }
+
+            .timeline-item {
+                justify-content: flex-start !important;
+            }
+
+            .timeline-item .timeline-content {
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+                text-align: left !important;
+                max-width: calc(100% - 80px);
+            }
+
+            .timeline-marker {
+                left: 15px !important;
+                transform: none !important;
+            }
+
+            .timeline-content::after {
+                left: -10px !important;
+                right: auto !important;
+                border-color: transparent white transparent transparent !important;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .meta-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .back-button {
+                position: static;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+        <h1>🚗 A Grande Troca de Motor</h1>
+        <p>Uma jornada de desafios, aprendizado e conquistas mecânicas</p>
+        <div class="meta-info">
+            <div class="meta-item">
+                <i class="fas fa-calendar-alt"></i> Maio - Junho 2025
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-car"></i> VW Gol 2000
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-cogs"></i> Motor 1.0 16v Turbo
+            </div>
+            <div class="meta-item">
+                <i class="fas fa-clock"></i> 47 dias de projeto (até o momento)
+            </div>
+        </div>
+    </header>
+
+    <!-- Timeline Container -->
+    <div class="timeline-container">
+        <div class="timeline-header">
+            <h2>📖 A Jornada Completa</h2>
+            <p>Acompanhe cada etapa desta aventura mecânica</p>
+        </div>
+
+        <div class="timeline">
+            <!-- Etapa 1: O Problema -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">1</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">O Problema</span>
+                    <h3 class="timeline-title">🔥 Quando Tudo Começou</h3>
+                    <!-- <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 16 de Abril, 2025 - Quarta-feira
+                    </div> -->
+                    <p class="timeline-description">
+                        Em um dia qualquer, o carro começou a apresentar um barulho vindo do motor. 
+                        O que parecia ser apenas um "tec" acabou sendo o início de uma jornada que mudaria 
+                        minha relação com a mecânica automotiva para sempre.
+                    </p>
+                    
+                    <div class="challenge-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> O Problema</h4>
+                        <p>Motor fazendo barulho de tec constante.</p>
+                    </div>                   
+                    
+                    
+                </div>
+            </div>
+
+            <!-- Etapa 2: Diagnóstico -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">2</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Diagnóstico</span>
+                    <h3 class="timeline-title">🔍 Investigando o Problema</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 16 de Abril, 2025 - Quinta-feira
+                    </div>
+                    <p class="timeline-description">
+                        Depois do susto inicial, era hora de entender exatamente o que havia acontecido. 
+                        Levei o carro para alguns mecânicos para tentar encontrar o problema.   
+                    </p>
+
+                    <div class="media-grid">
+                        <img src="./projetos/trocaMotor/idaAoMecanico.jpg" alt="Ida ao mecânico" style="width: 100%; border-radius: 10px; margin: 1rem 0;">
+                    </div>
+                    <div class="challenge-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i>Problemas encontrados</h4>
+                        <p>Motor fazendo barulho de tec constante.</p>
+                    </div> 
+                    <div class="challenge-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Problemas Encontrados</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">4º cilindro aparentemente sem funcionar</div>
+                            <div class="tool-item">Filtro de ar molhado</div>
+                            <div class="tool-item">Cabos de vela deteriorados</div>
+                            <div class="tool-item">Prisioneiros de mancal de comando com a rosca estragada</div>
+                        </div>
+                    </div>
+                    <div class="tools-box">
+                        <h4><i class="fas fa-wrench"></i> Coisas a serem feitas</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">Troca de velas</div>
+                            <div class="tool-item">Troca de cabos de vela</div>
+                            <div class="tool-item">Refazer roscas mancais de comando</div>
+                            <div class="tool-item">Troca da tampa do filtro de ar</div>
+                        </div>
+                    </div> 
+                     
+                </div>
+            </div>
+
+            <!-- Etapa 3: Pesquisa -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">3</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Tentando Resolver</span>
+                    <h3 class="timeline-title">Tentando possíveis soluções</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 8 de Maio, 2025 - Quinta-feira
+                    </div>
+                    <p class="timeline-description">
+                       Após resolver providenciar as peças e substituí-las, o problema persistiu. Fui em uma torneadora para refazer as roscas de dois prisioneiros de mancal de comando. 
+                    </p>
+                    <div class="media-grid">
+                        <img src="./projetos/trocaMotor/torneadora.jpg" alt="Ida ao mecânico" style="width: 100%; border-radius: 10px; margin: 1rem 0;">
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- O pior -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Ainda Tentando Resolver</span>
+                    <h3 class="timeline-title">Tentando possíveis soluções</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 8 de Maio, 2025 - Quinta-feira
+                    </div>
+                    <p class="timeline-description">
+                        A esperança era que o barulho poderiam ser os prisioneiros batendo na tampa de válvulas, que já havia sido soldada no mesmo lugar. Após o reparo, nada mudou.
+                        Como sugestão do mecânico, fui à retífica para tentar fazer uma regulagem de válvulas, procedimento que ele não conseguiria fazer pois não tem as ferramentas adequadas.
+                        Porém, não é possível fazer isso nesse motor, pois ele é equipado com tuchos hidraulicos, responsáveis por regular as válvulas automaticamente.
+                        Conversando com o pessoal da retífica tentando fazer um diagnóstico, o dono da retífica vê um suposto mecânico passando na rua e pede para ele avaliar o motor.
+                        Explico a situação para o indivíduo, aparentemente embragado, ele examina e diz que o problema são os tuchos. Mostro para ele, acelerando um pouco e mostrando que era outro barulho.
+                        Logo após, ele acelera forte o motor, depois repete mais uma vez. 
+                    </p>
+                   
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">5</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Motor estragado</span>
+                    <h3 class="timeline-title">Agora já era</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 8 de Maio, 2025 - Quinta-feira
+                    </div>
+                    <p class="timeline-description">
+                        O motor faz um barulho de estouro e começa a falhar.
+                        Olho para o escapamento e: 
+                    </p>
+                    <video controls style="width: 100%; border-radius: 10px; margin: 1rem 0;">
+                        <source src="./projetos/trocaMotor/carroFumando.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeo.
+                    </video>
+                    
+                   
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">6</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Indo embora</span>
+                    <h3 class="timeline-title">Carregando no guincho</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 8 de Maio, 2025 - Quinta-feira
+                    </div>
+                    <p class="timeline-description">
+                       Precisei chamar um guincho para ir embora.
+                    </p>
+                    <video controls style="width: 100%; border-radius: 10px; margin: 1rem 0;">
+                        <source src="./projetos/trocaMotor/carroNoGuincho.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeo.
+                    </video>
+                    
+                   
+                </div>
+            </div>
+            <!-- Etapa 4: Compra -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">4</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Aquisição</span>
+                    <h3 class="timeline-title">💰 A Compra do Motor</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 28 de Janeiro, 2024 - Domingo
+                    </div>
+                    <p class="timeline-description">
+                        Após muito pensar, decidi por um motor remanufaturado com garantia de 6 meses. 
+                        A decisão não foi fácil, mas o equilíbrio entre preço e confiabilidade me convenceu.
+                    </p>
+
+                    <div class="solution-box">
+                        <h4><i class="fas fa-check-circle"></i> A Escolha</h4>
+                        <p>Motor R18A remanufaturado com 6 meses de garantia, procedência comprovada e teste de bancada aprovado. Investimento total: R$ 5.200.</p>
+                    </div>
+
+                    <div class="media-placeholder" onclick="showUploadInfo('Foto do motor novo/remanufaturado')">
+                        <i class="fas fa-camera"></i>
+                        <div class="upload-text">Foto: Motor Remanufaturado</div>
+                        <div class="upload-subtext">Chegada do novo motor</div>
+                    </div>
+                    
+                    <div class="media-placeholder" onclick="showUploadInfo('Vídeo do teste de bancada')">
+                        <i class="fas fa-video"></i>
+                        <div class="upload-text">Vídeo: Teste de Bancada</div>
+                        <div class="upload-subtext">Motor funcionando perfeitamente</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 5: Preparação -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">5</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Preparação</span>
+                    <h3 class="timeline-title">🛠️ Organizando o Workspace</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 2-5 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        Antes de começar a troca, precisava organizar tudo: local de trabalho, ferramentas, 
+                        peças adicionais e principalmente, reunir os amigos que toparam essa aventura comigo.
+                    </p>
+
+                    <div class="tools-box">
+                        <h4><i class="fas fa-toolbox"></i> Arsenal de Ferramentas</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">Jogo de Chaves</div>
+                            <div class="tool-item">Chaves de Fenda</div>
+                            <div class="tool-item">Macaco Hidráulico</div>
+                            <div class="tool-item">Cavaletes</div>
+                            <div class="tool-item">Talha 2 Toneladas</div>
+                            <div class="tool-item">Chaves Torx</div>
+                            <div class="tool-item">Multímetro</div>
+                            <div class="tool-item">Alicates Diversos</div>
+                        </div>
+                    </div>
+
+                    <div class="media-grid">
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto da oficina/garagem organizada')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Oficina Organizada</div>
+                            <div class="upload-subtext">Pronta para o trabalho</div>
+                        </div>
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto das ferramentas organizadas')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Ferramentas</div>
+                            <div class="upload-subtext">Tudo no lugar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 6: Remoção -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">6</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Remoção</span>
+                    <h3 class="timeline-title">⚡ Tirando o Motor Velho</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 8-12 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        O momento mais tenso e trabalhoso: retirar o motor danificado. Cada parafuso, 
+                        cada conector, cada mangueira precisava ser documentada para facilitar a remontagem.
+                    </p>
+
+                    <div class="challenge-box">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Principais Desafios</h4>
+                        <p>Parafusos emperrados pela ferrugem, conectores frágeis que quebravam facilmente e o peso do motor na hora da remoção.</p>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-label">Remoção do Motor Antigo</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="media-placeholder" onclick="showUploadInfo('Vídeo da remoção do motor')">
+                        <i class="fas fa-video"></i>
+                        <div class="upload-text">Vídeo: Processo de Remoção</div>
+                        <div class="upload-subtext">Motor sendo retirado</div>
+                    </div>
+                    
+                    <div class="media-grid">
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto do compartimento vazio')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Compartimento Vazio</div>
+                            <div class="upload-subtext">Sem o motor</div>
+                        </div>
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto do motor danificado')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Motor Danificado</div>
+                            <div class="upload-subtext">Fora do carro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 7: Limpeza -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">7</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Limpeza</span>
+                    <h3 class="timeline-title">🧽 Preparando o Compartimento</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 15-18 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        Com o motor fora, era hora de limpar tudo: óleo derramado, graxa acumulada e aproveitar 
+                        para trocar alguns componentes do compartimento que só são acessíveis sem o motor.
+                    </p>
+
+                    <div class="tools-box">
+                        <h4><i class="fas fa-spray-can"></i> Produtos de Limpeza</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">Desengraxante</div>
+                            <div class="tool-item">Escova de Aço</div>
+                            <div class="tool-item">Panos</div>
+                            <div class="tool-item">Água Pressurizada</div>
+                        </div>
+                    </div>
+
+                    <div class="media-placeholder" onclick="showUploadInfo('Foto do antes e depois da limpeza')">
+                        <i class="fas fa-camera"></i>
+                        <div class="upload-text">Antes e Depois</div>
+                        <div class="upload-subtext">Compartimento limpo</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 8: Instalação -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">8</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Instalação</span>
+                    <h3 class="timeline-title">🔧 Colocando o Motor Novo</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 22-28 de Fevereiro, 2024
+                    </div>
+                    <p class="timeline-description">
+                        O momento mais esperado: instalar o motor novo. Todo cuidado era pouco para não 
+                        danificar nada e garantir que tudo fosse conectado corretamente.
+                    </p>
+
+                    <div class="solution-box">
+                        <h4><i class="fas fa-lightbulb"></i> Dica Importante</h4>
+                        <p>Documentar cada conector com fotos facilitou muito a remontagem. Etiquetas numeradas salvaram horas de trabalho!</p>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-label">Instalação do Motor Novo</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="media-placeholder" onclick="showUploadInfo('Vídeo da instalação do motor novo')">
+                        <i class="fas fa-video"></i>
+                        <div class="upload-text">Vídeo: Instalação</div>
+                        <div class="upload-subtext">Motor entrando no carro</div>
+                    </div>
+                    
+                    <div class="media-grid">
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto do motor posicionado')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Motor Posicionado</div>
+                            <div class="upload-subtext">No lugar certo</div>
+                        </div>
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto das conexões sendo feitas')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Conexões</div>
+                            <div class="upload-subtext">Ligando tudo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 9: Primeiro Teste -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">9</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Primeiro Teste</span>
+                    <h3 class="timeline-title">🔥 O Momento da Verdade</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 2 de Março, 2024 - Sábado
+                    </div>
+                    <p class="timeline-description">
+                        Depois de semanas de trabalho, chegou a hora de girar a chave e descobrir se tudo 
+                        deu certo. A tensão era palpável, mas o ronco do motor novo foi música para os ouvidos!
+                    </p>
+
+                    <div class="solution-box">
+                        <h4><i class="fas fa-trophy"></i> Sucesso!</h4>
+                        <p>Motor pegou na primeira tentativa! Sem vazamentos, sem ruídos estranhos, funcionamento perfeito.</p>
+                    </div>
+
+                    <div class="media-placeholder" onclick="showUploadInfo('Vídeo do primeiro ronco do motor')">
+                        <i class="fas fa-video"></i>
+                        <div class="upload-text">Vídeo: Primeiro Ronco</div>
+                        <div class="upload-subtext">O momento mais esperado!</div>
+                    </div>
+                    
+                    <div class="media-placeholder" onclick="showUploadInfo('Foto da comemoração')">
+                        <i class="fas fa-camera"></i>
+                        <div class="upload-text">Foto: Comemoração</div>
+                        <div class="upload-subtext">Missão cumprida!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etapa 10: Testes Finais -->
+            <div class="timeline-item fade-in">
+                <div class="timeline-marker">10</div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Finalização</span>
+                    <h3 class="timeline-title">✅ Ajustes e Testes Finais</h3>
+                    <div class="timeline-date">
+                        <i class="fas fa-calendar"></i> 5-10 de Março, 2024
+                    </div>
+                    <p class="timeline-description">
+                        Com o motor funcionando, era hora dos ajustes finais: check-up completo, 
+                        primeira troca de óleo, regulagem da ignição e testes de estrada para 
+                        garantir que tudo estava perfeito.
+                    </p>
+
+                    <div class="progress-container">
+                        <div class="progress-label">Projeto Concluído</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                    <div class="tools-box">
+                        <h4><i class="fas fa-clipboard-check"></i> Checklist Final</h4>
+                        <div class="tools-grid">
+                            <div class="tool-item">✅ Níveis de Fluidos</div>
+                            <div class="tool-item">✅ Pressão dos Pneus</div>
+                            <div class="tool-item">✅ Teste de Estrada</div>
+                            <div class="tool-item">✅ Scanner OBD2</div>
+                            <div class="tool-item">✅ Regulagem Motor</div>
+                            <div class="tool-item">✅ Documentação</div>
+                        </div>
+                    </div>
+
+                    <div class="media-placeholder" onclick="showUploadInfo('Vídeo do teste de estrada')">
+                        <i class="fas fa-video"></i>
+                        <div class="upload-text">Vídeo: Teste de Estrada</div>
+                        <div class="upload-subtext">Primeiro passeio</div>
+                    </div>
+                    
+                    <div class="media-grid">
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto do carro completo')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Carro Pronto</div>
+                            <div class="upload-subtext">Funcionando perfeitamente</div>
+                        </div>
+                        <div class="media-placeholder" onclick="showUploadInfo('Foto do time que ajudou')">
+                            <i class="fas fa-camera"></i>
+                            <div class="upload-text">Time de Apoio</div>
+                            <div class="upload-subtext">Quem fez acontecer</div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); padding: 2rem; border-radius: 15px; margin-top: 2rem; border-left: 6px solid #059669;">
+                        <h4 style="color: #059669; margin-bottom: 1rem; font-size: 1.2rem;">🎯 Resultados Finais:</h4>
+                        <ul style="margin: 0; list-style: none; line-height: 1.8;">
+                            <li style="margin-bottom: 0.5rem;">🚗 <strong>Economia:</strong> R$ 3.500 comparado ao serviço completo em concessionária</li>
+                            <li style="margin-bottom: 0.5rem;">📚 <strong>Aprendizado:</strong> Conhecimento completo sobre mecânica automotiva</li>
+                            <li style="margin-bottom: 0.5rem;">🤝 <strong>Amizades:</strong> Fortalecimento dos laços com amigos que ajudaram</li>
+                            <li style="margin-bottom: 0.5rem;">⏱️ <strong>Tempo:</strong> 45 dias de projeto executado com sucesso</li>
+                            <li style="margin-bottom: 0.5rem;">🏆 <strong>Satisfação:</strong> Sensação indescritível de "eu fiz isso!"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to show upload information
+        function showUploadInfo(mediaType) {
+            alert(`📁 Adicione aqui: ${mediaType}\n\n💡 Dica: Substitua este placeholder pelo seu arquivo:\n\n📷 Para fotos: <img src="sua-foto.jpg" alt="${mediaType}" class="media-image">\n\n🎥 Para vídeos: <video controls><source src="seu-video.mp4" type="video/mp4"></video>`);
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Progress bar animation when visible
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressFill = entry.target.querySelector('.progress-fill');
+                    if (progressFill) {
+                        setTimeout(() => {
+                            const width = progressFill.style.width || '100%';
+                            progressFill.style.width = '0%';
+                            setTimeout(() => {
+                                progressFill.style.width = width;
+                            }, 100);
+                        }, 300);
+                    }
+                }
+            });
+        });
+
+        document.querySelectorAll('.progress-container').forEach(container => {
+            progressObserver.observe(container);
+        });
+
+        // Add hover effects to timeline items
+        document.querySelectorAll('.timeline-content').forEach(content => {
+            content.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            content.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click effects to placeholders
+        document.querySelectorAll('.media-placeholder').forEach(placeholder => {
+            placeholder.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.borderColor = '#1e3a8a';
+            });
+            
+            placeholder.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.borderColor = '#9ca3af';
+            });
+        });
+
+        // Timeline marker pulse animation
+        document.querySelectorAll('.timeline-marker').forEach(marker => {
+            marker.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(-50%) scale(1.1)';
+            });
+            
+            marker.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(-50%) scale(1)';
+            });
+        });
+
+        // Initialize all animations on page load
+        window.addEventListener('load', function() {
+            // Add staggered animation to timeline items
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.2}s`;
+            });
+        });
+
+        console.log('✅ Timeline carregada com sucesso!');
+        console.log(`📊 Total de itens na timeline: ${document.querySelectorAll('.timeline-item').length}`);
+    </script>
+</body>
+</html>

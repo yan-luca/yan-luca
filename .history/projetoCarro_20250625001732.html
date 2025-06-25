@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troca de Motor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #06b6d4;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #ffffff;
+            --bg-light: #f8fafc;
+            --border-color: #e5e7eb;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-light);
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
+            background-size: cover;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) translateX(-5px);
+        }
+
+        .project-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Project Overview */
+        .project-overview {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .overview-text {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .overview-text h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .overview-text p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .project-stats {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* Timeline */
+        .timeline-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border: 10px solid;
+            border-color: transparent transparent transparent white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 30px;
+            width: 0;
+            height: 0;
+            border: 10px solid;
+            border-color: transparent white transparent transparent;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--primary-color);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-marker {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-marker {
+            left: -10px;
+        }
+
+        .timeline-step {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .timeline-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Media Content */
+        .media-content {
+            margin-top: 1.5rem;
+        }
+
+        .media-image {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .media-image:hover {
+            transform: scale(1.05);
+        }
+
+        .media-video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .code-snippet {
+            background: #1a1a1a;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .code-header {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 0.5rem 1rem;
+            border-radius: 10px 10px 0 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+        }
+
+        .modal-content img,
+        .modal-content video {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 50px !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-marker {
+                left: 10px !important;
+                right: auto !important;
+            }
+
+            .timeline-content::after {
+                left: -10px !important;
+                right: auto !important;
+                border-color: transparent white transparent transparent !important;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+
+            .back-button {
+                position: static;
+                transform: none;
+                margin-bottom: 1rem;
+                display: inline-block;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-button">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+            <h1 class="project-title">Troca de Motor</h1>
+            <p class="project-subtitle">Uma jornada de desafios, aprendizado e conquistas mecânicas</p>
+            <div class="tech-stack">
+                <span class="tech-item">ESP32</span>
+                <span class="tech-item">MQTT</span>
+                <span class="tech-item">Home Assistant</span>
+                <span class="tech-item">Ubuntu Server</span>
+                <span class="tech-item">WiFi</span>
+                <span class="tech-item">C++</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Overview -->
+    <section class="project-overview fade-in">
+        <div class="overview-grid">
+            <div class="overview-text">
+                <h2>Sobre o Projeto</h2>
+                <p>Este projeto implementa um sistema completo de automação residencial usando microcontroladores ESP32 e protocolo MQTT. O sistema permite controle remoto de lâmpadas através de uma interface web integrada com Home Assistant.</p>
+                
+                <p>A solução combina hardware embarcado, comunicação sem fio e interface web para criar uma experiência de automação residencial moderna e acessível. O sistema é escalável e pode ser expandido para controlar outros dispositivos eletrônicos.</p>
+                
+                <p><strong>Principais funcionalidades:</strong></p>
+                <ul>
+                    <li>Controle remoto via aplicativo web</li>
+                    <li>Comunicação MQTT para baixa latência</li>
+                    <li>Interface Home Assistant integrada</li>
+                    <li>Feedback em tempo real do status dos dispositivos</li>
+                    <li>Configuração WiFi automática</li>
+                </ul>
+            </div>
+            
+            <div class="project-stats">
+                <h3>Estatísticas do Projeto</h3>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <div>
+                        <strong>Microcontroladores</strong>
+                        <p>3 ESP32 utilizados</p>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <strong>Dispositivos</strong>
+                        <p>8 lâmpadas controladas</p>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div>
+                        <strong>Alcance</strong>
+                        <p>50+ metros via WiFi</p>
+                    </div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <strong>Latência</strong>
+                        <p>&lt; 100ms resposta</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section fade-in">
+        <div class="timeline-header">
+            <h2>Desenvolvimento do Projeto</h2>
+            <p>Acompanhe o processo de criação do sistema de automação residencial</p>
+        </div>
+        
+        <div class="timeline">
+            <!-- Step 1: Planning -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Etapa 1</span>
+                    <h3 class="timeline-title">Planejamento e Arquitetura</h3>
+                    <p class="timeline-description">
+                        Definição da arquitetura do sistema, escolha dos componentes e criação do diagrama de rede. 
+                        Estudei as melhores práticas para comunicação MQTT e integração com Home Assistant.
+                    </p>
+                    <div class="media-content">
+                        <img src="projetos/automacao/arquitetura-sistema.jpg" alt="Arquitetura do Sistema" class="media-image" onclick="openModal(this)">
+                        <p><em>Diagrama da arquitetura do sistema</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Hardware Setup -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Etapa 2</span>
+                    <h3 class="timeline-title">Montagem do Hardware</h3>
+                    <p class="timeline-description">
+                        Montagem dos circuitos com ESP32, relés e módulos de potência para controle das lâmpadas. 
+                        Cada módulo foi testado individualmente antes da integração.
+                    </p>
+                    <div class="media-content">
+                        <div class="media-grid">
+                            <img src="projetos/automacao/esp32-montagem.jpg" alt="ESP32 Montado" class="media-image" onclick="openModal(this)">
+                            <img src="projetos/automacao/circuito-rele.jpg" alt="Circuito com Relé" class="media-image" onclick="openModal(this)">
+                        </div>
+                        <p><em>Montagem dos módulos ESP32 com relés</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Programming -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Etapa 3</span>
+                    <h3 class="timeline-title">Programação dos Microcontroladores</h3>
+                    <p class="timeline-description">
+                        Desenvolvimento do firmware em C++ para os ESP32, implementando comunicação WiFi, protocolo MQTT e controle dos relés.
+                    </p>
+                    <div class="media-content">
+                        <div class="code-header">main.cpp - ESP32 Firmware</div>
+                        <div class="code-snippet">
+#include &lt;WiFi.h&gt;
+#include &lt;PubSubClient.h&gt;
+
+const char* ssid = "SUA_REDE_WIFI";
+const char* password = "SUA_SENHA";
+const char* mqtt_server = "192.168.1.100";
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+const int relayPin = 2;
+bool lightState = false;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(relayPin, OUTPUT);
+  
+  setup_wifi();
+  client.setServer(mqtt_server, 1883);
+  client.setCallback(callback);
+}
+
+void callback(char* topic, byte* payload, unsigned int length) {
+  String message;
+  for (int i = 0; i &lt; length; i++) {
+    message += (char)payload[i];
+  }
+  
+  if (String(topic) == "home/light/living_room") {
+    if (message == "ON") {
+      digitalWrite(relayPin, HIGH);
+      lightState = true;
+    } else if (message == "OFF") {
+      digitalWrite(relayPin, LOW);
+      lightState = false;
+    }
+    
+    // Enviar status de volta
+    client.publish("home/light/living_room/status", 
+                  lightState ? "ON" : "OFF");
+  }
+}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: MQTT Setup -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Etapa 4</span>
+                    <h3 class="timeline-title">Configuração do Servidor MQTT</h3>
+                    <p class="timeline-description">
+                        Instalação e configuração do broker Mosquitto no Ubuntu Server para gerenciar a comunicação entre dispositivos.
+                    </p>
+                    <div class="media-content">
+                        <video controls class="media-video">
+                            <source src="projetos/automacao/mqtt-config-demo.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <p><em>Demonstração da configuração do MQTT</em></p>
+                        
+                        <div class="code-header">mosquitto.conf</div>
+                        <div class="code-snippet">
+# Configuração do Mosquitto MQTT Broker
+port 1883
+allow_anonymous true
+log_dest file /var/log/mosquitto/mosquitto.log
+log_type all
+connection_messages true
+log_timestamp true
+
+# Persistência de dados
+persistence true
+persistence_location /var/lib/mosquitto/
+
+# Configurações de rede
+max_connections 100
+max_keepalive 300
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: Home Assistant -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Etapa 5</span>
+                    <h3 class="timeline-title">Integração com Home Assistant</h3>
+                    <p class="timeline-description">
+                        Configuração do Home Assistant para criar uma interface visual amigável e controlar todos os dispositivos através de um dashboard centralizado.
+                    </p>
+                    <div class="media-content">
+                        <img src="projetos/automacao/home-assistant-dashboard.jpg" alt="Dashboard Home Assistant" class="media-image" onclick="openModal(this)">
+                        <p><em>Interface do Home Assistant configurada</em></p>
+                        
+                        <div class="code-header">configuration.yaml</div>
+                        <div class="code-snippet">
+# Configuração Home Assistant
+mqtt:
+  broker: 192.168.1.100
+  port: 1883
+  username: homeassistant
+  password: !secret mqtt_password
+
+light:
+  - platform: mqtt
+    name: "Sala de Estar"
+    state_topic: "home/light/living_room/status"
+    command_topic: "home/light/living_room"
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+    retain: true
+    
+  - platform: mqtt
+    name: "Quarto Principal"
+    state_topic: "home/light/bedroom/status"
+    command_topic: "home/light/bedroom"
+    payload_on: "ON"
+    payload_off: "OFF"
+    
+automation:
+  - alias: "Luzes automáticas ao anoitecer"
+    trigger:
+      platform: sun
+      event: sunset
+    action:
+      service: light.turn_on
+      target:
+        entity_id: light.sala_de_estar
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6: Testing -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Etapa 6</span>
+                    <h3 class="timeline-title">Testes e Validação</h3>
+                    <p class="timeline-description">
+                        Realização de testes extensivos para garantir a confiabilidade do sistema, incluindo testes de conectividade, latência e falhas de rede.
+                    </p>
+                    <div class="media-content">
+                        <video controls class="media-video">
+                            <source src="projetos/automacao/sistema-funcionando.mp4" type="video/mp4">
+                            Seu navegador não suporta o elemento de vídeo.
+                        </video>
+                        <p><em>Demonstração do sistema funcionando</em></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 7: Final Result -->
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-step">Resultado Final</span>
+                    <h3 class="timeline-title">Sistema Completo em Funcionamento</h3>
+                    <p class="timeline-description">
+                        Sistema de automação residencial totalmente funcional, permitindo controle remoto de 8 lâmpadas através de interface web responsiva e aplicativo mobile.
+                    </p>
+                    <div class="media-content">
+                        <div class="media-grid">
+                            <img src="projetos/automacao/app-mobile.jpg" alt="App Mobile" class="media-image" onclick="openModal(this)">
+                            <img src="projetos/automacao/interface-web.jpg" alt="Interface Web" class="media-image" onclick="openModal(this)">
+                            <img src="projetos/automacao/instalacao-final.jpg" alt="Instalação Final" class="media-image" onclick="openModal(this)">
+                        </div>
+                        <p><em>Interfaces mobile, web e instalação final do sistema</em></p>
+                        
+                        <h4 style="margin-top: 2rem; color: var(--primary-color);">Funcionalidades Implementadas:</h4>
+                        <ul style="margin-top: 1rem; line-height: 1.8;">
+                            <li>✅ Controle via aplicativo móvel e interface web</li>
+                            <li>✅ Feedback em tempo real do status das lâmpadas</li>
+                            <li>✅ Automações baseadas em horário e sensor de luz</li>
+                            <li>✅ Controle por voz através do Google Assistant</li>
+                            <li>✅ Sistema de logs e monitoramento</li>
+                            <li>✅ Recuperação automática de falhas de conectividade</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <video id="modalVideo" controls style="display: none;">
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Modal functions
+        function openModal(element) {
+            const modal = document.getElementById('mediaModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            if (element.tagName === 'IMG') {
+                modalImage.src = element.src;
+                modalImage.style.display = 'block';
+                modalVideo.style.display = 'none';
+            } else if (element.tagName === 'VIDEO') {
+                modalVideo.src = element.querySelector('source').src;
+                modalVideo.style.display = 'block';
+                modalImage.style.display = 'none';
+            }
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('mediaModal');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            modal.style.display = 'none';
+            modalVideo.pause();
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('mediaModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Timeline animation on scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        timelineItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(50px)';
+            item.style.transition = 'all 0.6s ease';
+            timelineObserver.observe(item);
+        });
+
+        // Add click events to videos for modal
+        document.querySelectorAll('.media-video').forEach(video => {
+            video.addEventListener('click', function() {
+                openModal(this);
+            });
+        });
+    </script>
+</body>
+</html>
