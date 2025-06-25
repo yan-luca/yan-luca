@@ -1,0 +1,15 @@
+# .github/workflows/sync.yml
+name: Auto Sync
+on:
+  push:
+    branches: [main]
+
+jobs:
+  sync-gitlab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Push to GitLab
+        run: |
+          git remote add gitlab https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/seu-usuario/portfolio.git
+          git push gitlab main
