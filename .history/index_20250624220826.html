@@ -490,130 +490,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Certificate Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            position: relative;
-            margin: auto;
-            padding: 20px;
-            width: 90%;
-            max-width: 800px;
-            top: 50%;
-            transform: translateY(-50%);
-            text-align: center;
-        }
-
-        .modal-content img {
-            max-width: 100%;
-            max-height: 80vh;
-            border-radius: 10px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close:hover {
-            color: var(--primary-color);
-        }
-
-        .certificate-title {
-            color: white;
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
-        /* Certificate Grid */
-        .certificates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .certificate-item {
-            background: white;
-            padding: 2rem 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .certificate-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .certificate-item:hover::before {
-            left: 100%;
-        }
-
-        .certificate-item:hover {
-            transform: translateY(-8px);
-            border-color: var(--primary-color);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
-        }
-
-        .certificate-item i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .certificate-name {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-            line-height: 1.4;
-        }
-
-        .certificate-institution {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .certificate-year {
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .certificate-item:hover .certificate-name {
-            color: var(--primary-color);
-        }
+        /* Contact Section */
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -763,7 +640,6 @@
                 <li><a href="#home">Início</a></li>
                 <li><a href="#about">Sobre</a></li>
                 <li><a href="#projects">Projetos</a></li>
-                <li><a href="#certificates">Certificados</a></li>
                 <li><a href="#experience">Experiência</a></li>
                 <li><a href="#contact">Contato</a></li>
             </ul>
@@ -898,10 +774,6 @@
                         <div class="project-tech">Java • Spring Boot • Angular</div>
                         <p class="project-description">Sistema completo de gestão escolar (EduNotify) com cadastro de alunos, professores, disciplinas, matrícula e sistema de notificações aos responsáveis.</p>
                         <div class="project-links">
-                            <a href="projeto-gestao-escolar.html" class="project-link secondary" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                Ver Demo
-                            </a>
                             <a href="https://github.com/carlinn1/EduNotify" class="project-link primary" target="_blank">
                                 <i class="fab fa-github"></i>
                                 Código
@@ -919,10 +791,6 @@
                         <div class="project-tech">ESP32 • MQTT • Home Assistant • Ubuntu Server</div>
                         <p class="project-description">Sistema embarcado completo de automação residencial com controle de lâmpadas via interface web e protocolo MQTT, integrado com Home Assistant.</p>
                         <div class="project-links">
-                            <a href="projetoAutomacaoResidencial.html" class="project-link secondary" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                Ver Demo
-                            </a>
                             <a href="https://github.com/yan-luca/yan-luca/tree/main/Automacao%20Residencial" class="project-link primary" target="_blank">
                                 <i class="fab fa-github"></i>
                                 Código
@@ -940,10 +808,6 @@
                         <div class="project-tech">C/C++ • ESP32 • Bluetooth</div>
                         <p class="project-description">Sistema de segurança automotivo avançado com controle via Bluetooth e acesso por impressão digital utilizando microcontrolador ESP32.</p>
                         <div class="project-links">
-                            <a href="projeto-alarme-automotivo.html" class="project-link secondary" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                Ver Demo
-                            </a>
                             <a href="https://github.com/yan-luca/yan-luca/tree/main/Alarme%20Automotivo" class="project-link primary" target="_blank">
                                 <i class="fab fa-github"></i>
                                 Código
@@ -961,10 +825,6 @@
                         <div class="project-tech">C/C++ • Sensores Ultrassom</div>
                         <p class="project-description">Robô autônomo inteligente que identifica oponentes usando sensores de ultrassom e executa estratégias de combate mantendo-se dentro da arena.</p>
                         <div class="project-links">
-                            <a href="projeto-robo-sumo.html" class="project-link secondary" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                Ver Demo
-                            </a>
                             <a href="https://github.com/yan-luca/yan-luca/tree/main/Robo%20Sumo" class="project-link primary" target="_blank">
                                 <i class="fab fa-github"></i>
                                 Código
@@ -982,10 +842,6 @@
                         <div class="project-tech">Python • Audio Control</div>
                         <p class="project-description">Sirene Musical - Sistema que permite programar horários para reprodução de músicas e anúncios da hora para ambientes escolares com controle automatizado.</p>
                         <div class="project-links">
-                            <a href="projeto-sirene-musical.html" class="project-link secondary" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                Ver Demo
-                            </a>
                             <a href="https://github.com/yan-luca/yan-luca/tree/main/Sirene%20Musical" class="project-link primary" target="_blank">
                                 <i class="fab fa-github"></i>
                                 Código
@@ -1003,10 +859,6 @@
                         <div class="project-tech">React • C#</div>
                         <p class="project-description">Sistema de gerenciamento e priorização de visitas escolares para campanhas educativas de trânsito do DNIT, com agendamento inteligente.</p>
                         <div class="project-links">
-                            <a href="projeto-visitas-escolares.html" class="project-link secondary" target="_blank">
-                                <i class="fas fa-eye"></i>
-                                Ver Demo
-                            </a>
                             <a href="https://github.com/orgs/fga-eps-mds/teams/2023-1-dnit/repositories" class="project-link primary" target="_blank">
                                 <i class="fab fa-github"></i>
                                 Código
@@ -1017,131 +869,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Certificates Section -->
-    <section id="certificates" class="section fade-in">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Certificados</h2>
-                <p class="section-subtitle">Minhas certificações e cursos concluídos</p>
-            </div>
-            <div class="certificates-grid">
-                <div class="certificate-item" onclick="openModal('certificados/certificado inglês.jpg', 'Inglês - Cooplem')">
-                    <i class="fas fa-globe-americas"></i>
-                    <div class="certificate-name">Inglês</div>
-                    <div class="certificate-institution">Cooplem</div>
-                    <div class="certificate-year">2019</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/Certificado Fundamentos de TI.pdf', 'Fundamentos de TI: Hardware e Software')">
-                    <i class="fas fa-desktop"></i>
-                    <div class="certificate-name">Fundamentos de TI: Hardware e Software</div>
-                    <div class="certificate-institution">Fundação Bradesco</div>
-                    <div class="certificate-year">2020</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/Certificado Fundamentos de Lógica de Programação.pdf', 'Fundamentos de Lógica de Programação')">
-                    <i class="fas fa-code"></i>
-                    <div class="certificate-name">Fundamentos de Lógica de Programação</div>
-                    <div class="certificate-institution">Fundação Bradesco</div>
-                    <div class="certificate-year">2020</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/certificado noções básicas de mecânica automotiva.pdf', 'Noções Básicas de Mecânica Automotiva')">
-                    <i class="fas fa-car"></i>
-                    <div class="certificate-name">Noções Básicas de Mecânica Automotiva</div>
-                    <div class="certificate-institution">Senai</div>
-                    <div class="certificate-year">2020</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/certificado photoshop.jpg', 'Oficina Photoshop – Composição de Imagens Cinemagraph')">
-                    <i class="fas fa-image"></i>
-                    <div class="certificate-name">Oficina Photoshop – Composição de Imagens Cinemagraph</div>
-                    <div class="certificate-institution">SAGA</div>
-                    <div class="certificate-year">2020</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/Certificado Desenvolvendo Aplicacoes com Android Studio.pdf', 'Desenvolvendo Aplicações Mobile com Android Studio')">
-                    <i class="fab fa-android"></i>
-                    <div class="certificate-name">Desenvolvendo Aplicações Mobile com Android Studio</div>
-                    <div class="certificate-institution">Fundação Bradesco</div>
-                    <div class="certificate-year">2022</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/CERTIFICADO_aplicacao de cad.pdf', 'Aplicação de CAD no Desenho Técnico')">
-                    <i class="fas fa-drafting-compass"></i>
-                    <div class="certificate-name">Aplicação de CAD no Desenho Técnico</div>
-                    <div class="certificate-institution">UnB</div>
-                    <div class="certificate-year">2022</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/certificado introdução a poo.pdf', 'Introdução à Programação Orientada a Objetos (POO)')">
-                    <i class="fas fa-cube"></i>
-                    <div class="certificate-name">Introdução à Programação Orientada a Objetos (POO)</div>
-                    <div class="certificate-institution">Fundação Bradesco</div>
-                    <div class="certificate-year">2023</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/certificado etica no desenvolvimento de sistemas.pdf', 'Ética no Desenvolvimento de Sistemas')">
-                    <i class="fas fa-balance-scale"></i>
-                    <div class="certificate-name">Ética no Desenvolvimento de Sistemas</div>
-                    <div class="certificate-institution">Fundação Bradesco</div>
-                    <div class="certificate-year">2023</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/Certificado Linguagem de programação Java- Básico.pdf', 'Linguagem de Programação Java – Básico')">
-                    <i class="fab fa-java"></i>
-                    <div class="certificate-name">Linguagem de Programação Java – Básico</div>
-                    <div class="certificate-institution">Fundação Bradesco</div>
-                    <div class="certificate-year">2023</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/Curso Automação_de_Sistemas-Certificado.pdf', 'Automação de Sistemas')">
-                    <i class="fas fa-robot"></i>
-                    <div class="certificate-name">Automação de Sistemas</div>
-                    <div class="certificate-institution">Aprenda Mais – MEC</div>
-                    <div class="certificate-year">2023</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/FundamentosSuporteTecnico.pdf', 'Fundamentos do Suporte Técnico')">
-                    <i class="fas fa-headset"></i>
-                    <div class="certificate-name">Fundamentos do Suporte Técnico</div>
-                    <div class="certificate-institution">Google</div>
-                    <div class="certificate-year">2023</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/20240719_144737.jpg', 'Eletricista de Sistemas Fotovoltaicos – Energia Solar')">
-                    <i class="fas fa-solar-panel"></i>
-                    <div class="certificate-name">Eletricista de Sistemas Fotovoltaicos – Energia Solar</div>
-                    <div class="certificate-institution">Senai</div>
-                    <div class="certificate-year">2024</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/yan-fontenele_certificado_Embarcatech-1.pdf', 'Capacitação em Sistemas Embarcados - Embarcatech')">
-                    <i class="fas fa-microchip"></i>
-                    <div class="certificate-name">Capacitação em Sistemas Embarcados - Embarcatech</div>
-                    <div class="certificate-institution">Instituto Hardware Brasil</div>
-                    <div class="certificate-year">2025</div>
-                </div>
-
-                <div class="certificate-item" onclick="openModal('certificados/IntrodutionToSoftwareDevelopment.pdf', 'Introduction to Software Development')">
-                    <i class="fab fa-aws"></i>
-                    <div class="certificate-name">Introduction to Software Development</div>
-                    <div class="certificate-institution">Amazon</div>
-                    <div class="certificate-year">2025</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificate Modal -->
-    <div id="certificateModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modalImage" src="" alt="Certificado">
-            <div id="modalTitle" class="certificate-title"></div>
-        </div>
-    </div>
 
     <!-- Experience Section -->
     <section id="experience" class="section fade-in">
@@ -1295,42 +1022,6 @@
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
             });
-        });
-
-        // Certificate Modal Functions
-        function openModal(imagePath, title) {
-            const modal = document.getElementById('certificateModal');
-            const modalImage = document.getElementById('modalImage');
-            const modalTitle = document.getElementById('modalTitle');
-            
-            modal.style.display = 'block';
-            modalImage.src = imagePath;
-            modalTitle.textContent = title;
-            
-            // Prevent body scroll when modal is open
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('certificateModal');
-            modal.style.display = 'none';
-            
-            // Restore body scroll
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside the image
-        document.getElementById('certificateModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Close modal with ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
         });
 
         // Form submission (placeholder)
